@@ -1,0 +1,67 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./app/style.css"></link>
+
+	<script src="./lib/utils.js"></script>
+	<script src="./app/my_app.js"></script>
+	<script src="./app/app_states.js"></script>
+	<script>
+		var progress = utils.$progress();
+		function test_progress() {
+			progress.start();
+			console.log('Is progress running? ');
+			console.log(progress.running());
+			window.setTimeout(function () {
+				progress.stop();
+				console.log('Is progress stopped?');
+				console.log(progress.running());
+			}, 3000);
+		}
+		var test_get = function () {
+			utils.$get('http://127.0.0.1:1337',
+				function (status, response, headers, statusText) {
+					console.log('Status: ' + status);
+					console.log('Reponse: ' + response);
+					console.log('Headers: ' + headers);
+					console.log('Status Text: ' + statusText);
+				});
+		}
+		var test_post = function () {
+			utils.$post('http://127.0.0.1:1337', {one:1, two:2, three:'three'},
+				function (status, response, headers, statusText) {
+					console.log('Status: ' + status);
+					console.log('Reponse: ' + response);
+					console.log('Headers: ' + headers);
+					console.log('Status Text: ' + statusText);
+				});
+		}
+		var add_post = function () {
+			var btn = utils.$button('Test Post', test_post);
+			var body = document.getElementsByTagName('body')[0];
+			body.appendChild(btn);
+		};
+	</script>
+</head>
+
+<body style="background-color:#dc6;">
+
+	<button onclick="utils.$toast('Song added to playlist.');">Toast</button>
+
+	<br><br>
+
+	<button onclick="test_progress();">Test Progress Thing</button>
+
+	<br><br>
+	
+	<button onclick="test_get();">Test Get Request</button>
+
+	<br><br>
+	
+	<button onclick="add_post();" class="btn btn-primary">Add Post Button</button>
+
+</body>
+</html>
