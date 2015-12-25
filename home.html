@@ -1,0 +1,27 @@
+<html>
+
+<head>
+	<script src="./src/utils.js"></script>
+	<script>
+		var progress = utils.$progress();
+		function test_progress() {
+			progress.start();
+			console.log('Is progress running? ');
+			console.log(progress.running());
+			window.setTimeout(function () {
+				progress.stop();
+				console.log('Is progress stopped?');
+				console.log(progress.running());
+			}, 3000);
+		}
+	</script>
+</head>
+
+<body style="background-color:#dc6;">
+
+	<button onclick="utils.$toast('Song added to playlist.');">Toast</button>
+
+	<button onclick="test_progress();">Test Progress Thing</button>
+	
+</body>
+</html>
